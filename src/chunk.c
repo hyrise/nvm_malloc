@@ -29,6 +29,7 @@ inline void error_and_exit(char *msg, ...) {
     va_end(args);
     exit(-1);
 }
+void error_and_exit(char *msg, ...);
 
 static void            *chunk_region_start = NULL;
        void            *meta_info = NULL; /* must be non-static as it is exported to other translation units */
