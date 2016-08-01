@@ -32,7 +32,7 @@ ulib-svn/lib/libulib.a:
 	cd ulib-svn; make release
 
 clean:
-	@rm -f $(LIBNAME)
+	@rm -f $(LIBNAME) libnvmmallocnoflush.so libnvmmallocnofence.so libnvmmallocnone.so
 	@rm -rf $(OBJDIR)
 
 .PHONY: test debug release
