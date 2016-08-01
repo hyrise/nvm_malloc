@@ -13,16 +13,16 @@ release: $(LIBNAME) libnvmmallocnoflush.so libnvmmallocnofence.so libnvmmallocno
 debug: $(LIBNAME)
 
 $(LIBNAME): ulib-svn/lib/libulib.a $(addprefix $(OBJDIR)/, $(OBJECTS))
-	$(CC) $(CFLAGS) -shared -o $@ $(LDFLAGS) $(addprefix $(OBJDIR)/, $(OBJECTS)) ulib-svn/lib/libulib.a
+	$(CC) $(CFLAGS) -shared -o $@ $(addprefix $(OBJDIR)/, $(OBJECTS)) ulib-svn/lib/libulib.a $(LDFLAGS)
 
 libnvmmallocnoflush.so: $(SRCDIR)/*.c ulib-svn/lib/libulib.a
-	$(CC) $(CFLAGS) -shared -o $@ $(LDFLAGS) -DNOFLUSH $+ ulib-svn/lib/libulib.a
+	$(CC) $(CFLAGS) -shared -o $@ -DNOFLUSH $+ ulib-svn/lib/libulib.a $(LDFLAGS)
 
 libnvmmallocnofence.so: $(SRCDIR)/*.c ulib-svn/lib/libulib.a
-	$(CC) $(CFLAGS) -shared -o $@ $(LDFLAGS) -DNOFENCE $+ ulib-svn/lib/libulib.a
+	$(CC) $(CFLAGS) -shared -o $@ -DNOFENCE $+ ulib-svn/lib/libulib.a $(LDFLAGS)
 
 libnvmmallocnone.so: $(SRCDIR)/*.c ulib-svn/lib/libulib.a
-	$(CC) $(CFLAGS) -shared -o $@ $(LDFLAGS) -DNOFLUSH -DNOFENCE $+ ulib-svn/lib/libulib.a
+	$(CC) $(CFLAGS) -shared -o $@ -DNOFLUSH -DNOFENCE $+ ulib-svn/lib/libulib.a $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/*.h
 	@mkdir -p $(OBJDIR)
